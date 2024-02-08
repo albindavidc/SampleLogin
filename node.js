@@ -53,7 +53,13 @@ app.get('/signout', (req, res) => {
   });
 });
 
-
+app.get('/profile', (req,res)=> {
+  if(req.session.isLoggedIn) {
+    res.sendFile(__dirname + '/profile.html');
+  }else {
+    res.redirect('/home')
+  }
+})
 
 app.listen(3000, () => {
   console.log('Server is running on port 3000');
