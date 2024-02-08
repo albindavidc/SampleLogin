@@ -8,7 +8,7 @@ const app = express();
 app.use(
   session({
     secret: 'yourSecretKey',
-    resave: false,
+    resave: true,
     saveUninitialized: true,
   })
 );
@@ -46,6 +46,14 @@ app.get('/signout', (req, res) => {
     res.redirect('/');
   });
 });
+
+app.get('/profile', (req,res)=> {
+  if(req.session.isLoggedIn) {
+    res.sendFile(__dirname + '/profile.html');
+  }else {
+    res.redirect('/home')
+  }
+})
 
 app.listen(3000, () => {
   console.log('Server is running on port 3000');
