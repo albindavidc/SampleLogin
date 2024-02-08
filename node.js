@@ -8,7 +8,7 @@ const app = express();
 app.use(
   session({
     secret: 'yourSecretKey',
-    resave: false,
+    resave: true,
     saveUninitialized: true,
   })
 );
@@ -38,6 +38,12 @@ app.get('/home', (req, res) => {
   }
 });
 
+app.get('/profile', (req,res)=> {
+  
+    res.sendFile(__dirname + '/profile.html');
+
+});
+
 app.get('/signout', (req, res) => {
   req.session.destroy((err) => {
     if (err) {
@@ -46,6 +52,8 @@ app.get('/signout', (req, res) => {
     res.redirect('/');
   });
 });
+
+
 
 app.listen(3000, () => {
   console.log('Server is running on port 3000');
