@@ -9,18 +9,23 @@ const app = express();
 app.use(
   session({
     secret: "yourSecretKey",
-    resave: true,
-    saveUninitialized: true,
+    resave: false,
+    saveUninitialized: false,
   })
 );
 
 app.use(bodyParser.urlencoded({ extended: true }));
+
+
+
 
 // Set the views directory and view engine for EJS
 app.set("views", __dirname + "/partials");
 app.set("view engine", "ejs");
 
 // Middleware to prevent caching of the login page
+app.use(nocache());
+
 app.use((req, res, next) => {
   if (req.path === "/") {
     res.setHeader(
@@ -81,7 +86,7 @@ app.get("/signout", (req, res) => {
 });
 
 // Start the server
-const PORT = process.env.PORT || 3000;
+const PORT = 3000;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
