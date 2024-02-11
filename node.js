@@ -15,7 +15,6 @@ app.use(
 );
 
 
-
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // Set the views directory and view engine for EJS
