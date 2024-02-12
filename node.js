@@ -3,7 +3,6 @@ const session = require("express-session");
 const bodyParser = require("body-parser");
 const nocache = require("nocache");
 
-
 const app = express();
 
 // Middleware setup
@@ -15,14 +14,11 @@ app.use(
   })
 );
 
-
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// Set the views directory and view engine for EJS
 app.set("views", __dirname + "/partials");
 app.set("view engine", "ejs");
 
-// Middleware to prevent caching of the login page
 app.use(nocache());
 
 // Middleware to check if the user is already logged in
@@ -42,7 +38,6 @@ const checkSession = (req, res, next) => {
     next();
   }
 };
-
 
 // Routes
 app.get("/", redirectLoggedIn, (req, res) => {
