@@ -3,6 +3,7 @@ const session = require("express-session");
 const bodyParser = require("body-parser");
 const nocache = require("nocache");
 
+
 const app = express();
 
 // Middleware setup
@@ -71,6 +72,7 @@ app.get("/signout", (req, res) => {
     res.redirect("/");
   });
 });
+
 
 
 // Start the server
